@@ -46,16 +46,24 @@ class MySeleniumTests(StaticLiveServerTestCase):
         for question in test_questions:
         # accedir a la pàgina d'afegeix preguntes
         
-            self.selenium.get('%s%s' % (self.live_server_url, '/admin/polls/question/add'))
+            self.selenium.get('%s%s' % (self.live_server_url, '/admin/'))
             # comprovem que el títol de la pàgina és el què esperem
-            self.assertEqual( self.selenium.title , "Add question | Django site admin" )
+            self.assertEqual( self.selenium.title , "Site administration | Django site admin" )
+            
+            # Buscar al butón 'Add' de 'Questions'
+            # self.selenium.find_element(By.TAG_NAME, "a" and contains(text(), "/admin/polls/question/add/")).click()
+            self.selenium.find_element(By.XPATH, "//a[@href='/admin/polls/question/add/']").click()
+            
             # Rellenar el formulari
             question_text = self.selenium.find_element(By.NAME, "question_text") 
             question_text.send_keys(question)
+            
             question_date = self.selenium.find_element(By.LINK_TEXT,"Today").click()
             question_time = self.selenium.find_element(By.LINK_TEXT,"Now").click()
+            
             self.selenium.find_element(By.XPATH,'//input[@value="Save"]').click()
-           # comprovem de nou que el títol de la pàgina és el què esperem
+            
+            # comprovem de nou que el títol de la pàgina és el què esperem
             self.assertEqual( self.selenium.title , "Select question to change | Django site admin" )
         
         # introduïm dades per a 'Choice'

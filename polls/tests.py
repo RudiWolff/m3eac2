@@ -55,7 +55,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
             question_date = self.selenium.find_element(By.LINK_TEXT,"Today").click()
             question_time = self.selenium.find_element(By.LINK_TEXT,"Now").click()
             self.selenium.find_element(By.XPATH,'//input[@value="Save"]').click()
-            # comprovem de nou que el títol de la pàgina és el què esperem
+           # comprovem de nou que el títol de la pàgina és el què esperem
             self.assertEqual( self.selenium.title , "Select question to change | Django site admin" )
         
         # introduïm dades per a 'Choice'
@@ -82,6 +82,9 @@ class MySeleniumTests(StaticLiveServerTestCase):
             choice_text.send_keys(name)
             self.selenium.find_element(By.XPATH,'//input[@value="Save"]').click()
             
+            # comprovem de nou que el títol de la pàgina és el què esperem
+            self.assertEqual( self.selenium.title , "Select choice to change | Django site admin" )
+
         for name in pet_choices:
         # accedir a la pàgina d'afegeix preguntes
         
@@ -98,3 +101,6 @@ class MySeleniumTests(StaticLiveServerTestCase):
             choice_text = self.selenium.find_element(By.NAME, "choice_text") 
             choice_text.send_keys(name)
             self.selenium.find_element(By.XPATH,'//input[@value="Save"]').click()
+            
+            # comprovem de nou que el títol de la pàgina és el què esperem
+            self.assertEqual( self.selenium.title , "Select choice to change | Django site admin" )

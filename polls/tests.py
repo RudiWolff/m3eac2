@@ -40,18 +40,16 @@ class MySeleniumTests(StaticLiveServerTestCase):
         password_input = self.selenium.find_element(By.NAME,"password")
         password_input.send_keys('pirineus')
         self.selenium.find_element(By.XPATH,'//input[@value="Log in"]').click()
+
+        # comprovem que el títol de la pàgina és el què esperem
+        self.assertEqual( self.selenium.title , "Site administration | Django site admin" )
         
-        # introduïm dades per a 'Question'
+        # Definició de preguntes per inserir
         test_questions = ["What's ya name?", "What's ya pet's name?"]
+
+        # introduïm dades per pregunta
         for question in test_questions:
-        # accedir a la pàgina d'afegeix preguntes
-        
-            self.selenium.get('%s%s' % (self.live_server_url, '/admin/'))
-            # comprovem que el títol de la pàgina és el què esperem
-            self.assertEqual( self.selenium.title , "Site administration | Django site admin" )
-            
             # Buscar al butón 'Add' de 'Questions'
-            # self.selenium.find_element(By.TAG_NAME, "a" and contains(text(), "/admin/polls/question/add/")).click()
             self.selenium.find_element(By.XPATH, "//a[@href='/admin/polls/question/add/']").click()
             
             # Rellenar el formulari
@@ -74,9 +72,10 @@ class MySeleniumTests(StaticLiveServerTestCase):
         pet_choices = ["Fify", "Kitty"]
 
         for name in name_choices:
-        # accedir a la pàgina d'afegeix preguntes
-        
-            self.selenium.get('%s%s' % (self.live_server_url, '/admin/polls/choice/add'))
+            # accedir a la pàgina d'afegeix opcions des de el menú lateral
+            self.selenium.find_element(By.XPATH, "//a[@href='/admin/polls/choice/add/']").click()
+ 
+            # self.selenium.get('%s%s' % (self.live_server_url, '/admin/polls/choice/add'))
             # comprovem que el títol de la pàgina és el què esperem
             self.assertEqual( self.selenium.title , "Add choice | Django site admin" )
             

@@ -109,5 +109,5 @@ class MySeleniumTests(StaticLiveServerTestCase):
             choice_text.send_keys(name)
             self.selenium.find_element(By.XPATH,'//input[@value="Save"]').click()
             
-            # comprovem de nou que el títol de la pàgina és el què esperem
+            # comprovem de nou que el títol de la pàgina és el què esperem    
             self.assertEqual( self.selenium.title , "Select choice to change | Django site admin" )
